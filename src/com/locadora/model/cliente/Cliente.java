@@ -1,13 +1,15 @@
 package com.locadora.model.cliente;
 
+import java.util.Map;
+
 public interface Cliente {
-
-    String getIdentificador();
-
-    void setIdentificador(String id);
-
-    String getNome();
-
-    void setNome(String nome);
+	
+	Map<TipoIDCliente, String> getIdentificador();
+	
+	void setIdentificador(String id);
+	
+	String getNome();
+	
+	void setNome(String nome);
 
 }

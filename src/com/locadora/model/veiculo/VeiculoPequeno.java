@@ -4,9 +4,9 @@ import com.locadora.service.CalculaValorDiaria;
 
 public class VeiculoPequeno implements CalculaValorDiaria {
 
-    @Override
-    public double calcularValorDiaria() {
-        return 100;
-    }
+	@Override
+	public double calcularValorDiaria() {
+		return 100;
+	}
 
 }
