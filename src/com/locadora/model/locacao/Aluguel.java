@@ -9,38 +9,78 @@ import com.locadora.model.veiculo.VeiculoComValorDiaria;
 
 public class Aluguel extends EncontroPresencial {
 
-	private VeiculoComValorDiaria veiculoComValorDiaria;
-	private Cliente cliente;
-	private boolean pendente = true;
+    private VeiculoComValorDiaria veiculoComValorDiaria;
+    private Cliente cliente;
+    private boolean pendente = true;
 
-	public VeiculoComValorDiaria getVeiculoAgregado() {
-		return veiculoComValorDiaria;
-	}
+    private Aluguel() {
+    }
 
-	public void setVeiculoAgregado(VeiculoComValorDiaria veiculoAgregado) throws VeiculoIndisponivelException {
-		if(!veiculoAgregado.isDisponivel()) {
-			throw new VeiculoIndisponivelException(veiculoAgregado.getVeiculo().getNome() +
-					" com placa " +	veiculoAgregado.getVeiculo().getPlaca() +
-					" se encontra alugado.");
-		}
-		this.veiculoComValorDiaria = veiculoAgregado;
-		veiculoAgregado.setDisponivel(false);
-	}
+    public VeiculoComValorDiaria getVeiculoAgregado() {
+        return veiculoComValorDiaria;
+    }
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    public void setVeiculoAgregado(VeiculoComValorDiaria veiculoAgregado) throws VeiculoIndisponivelException {
+        if (!veiculoAgregado.isDisponivel()) {
+            throw new VeiculoIndisponivelException(veiculoAgregado.getVeiculo().getNome() +
+                    " com placa " + veiculoAgregado.getVeiculo().getPlaca() +
+                    " se encontra alugado.");
+        }
+        this.veiculoComValorDiaria = veiculoAgregado;
+        veiculoAgregado.setDisponivel(false);
+    }
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-	public boolean isPendente() {
-		return pendente;
-	}
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
-	public void setPendente(boolean pendente) {
-		this.pendente = pendente;
-	}
-	
+    public boolean isPendente() {
+        return pendente;
+    }
+
+    public void setPendente(boolean pendente) {
+        this.pendente = pendente;
+    }
+
+    public static class Alugar {
+
+        private Aluguel aluguel = new Aluguel();
+
+        public Alugar veiculo(VeiculoComValorDiaria veiculo) {
+            aluguel.setVeiculoAgregado(veiculo);
+            return this;
+        }
+
+        public Alugar paraCliente(Cliente cliente) {
+            aluguel.setCliente(cliente);
+            return this;
+        }
+
+        public Alugar noLocal(String local) {
+            aluguel.setLocal(local);
+            return this;
+        }
+
+        public Alugar naData(LocalDate data) {
+            aluguel.setData(data);
+            return this;
+        }
+
+        public Alugar noHorario(LocalTime horario) {
+            aluguel.setHorario(horario);
+            return this;
+        }
+
+        public Aluguel finalizar() {
+            return aluguel;
+        }
+
+    }
+
 }
+
+

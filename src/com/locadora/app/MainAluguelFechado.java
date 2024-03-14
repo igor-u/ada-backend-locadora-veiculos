@@ -2,10 +2,8 @@ package com.locadora.app;
 
 import com.locadora.model.cliente.Cliente;
 import com.locadora.model.cliente.PessoaFisica;
-import com.locadora.model.locacao.Alugar;
 import com.locadora.model.locacao.Aluguel;
 import com.locadora.model.locacao.Devolucao;
-import com.locadora.model.locacao.Devolver;
 import com.locadora.model.veiculo.Veiculo;
 import com.locadora.model.veiculo.VeiculoComValorDiaria;
 import com.locadora.service.TipoVeiculo;
@@ -21,14 +19,14 @@ public class MainAluguelFechado {
         VeiculoComValorDiaria vectra = new VeiculoComValorDiaria(veiculo1, TipoVeiculo.MEDIO);
         Cliente pessoaFisica1 = new PessoaFisica("12345", "Joao");
 
-        Aluguel aluguel = new Alugar().veiculo(vectra)
+        Aluguel aluguel = new Aluguel.Alugar().veiculo(vectra)
                 .paraCliente(pessoaFisica1)
                 .noLocal("Local1")
                 .naData(LocalDate.of(2024, 03, 12))
                 .noHorario(LocalTime.of(12, 30, 0))
                 .finalizar();
 
-        Devolucao devolucao = new Devolver().aluguel(aluguel)
+        Devolucao devolucao = new Devolucao.Devolver().aluguel(aluguel)
                 .noLocal("Local2")
                 .naData(LocalDate.of(2024, 03, 13))
                 .noHorario(LocalTime.of(12, 30, 0))
@@ -37,12 +35,7 @@ public class MainAluguelFechado {
 
         //exception - devolucao sobre aluguel fechado
         try {
-            Devolucao devolucao1 = new Devolver().aluguel(aluguel)
-                    .noLocal("Local2")
-                    .naData(LocalDate.of(2024, 03, 13))
-                    .noHorario(LocalTime.of(12, 30, 0))
-                    .fecharAluguel()
-                    .finalizar();
+            Devolucao devolucao1 = new Devolucao.Devolver().aluguel(aluguel).finalizar();
         } catch (RuntimeException e) {
             e.printStackTrace();
         }

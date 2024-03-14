@@ -5,6 +5,6 @@ import com.locadora.model.locacao.Devolucao;
 
 public interface CalculaTempoDecorrido {
 
-	int calcularTempoDecorrido(Aluguel aluguel, Devolucao devolucao);
-	
+    int calcularTempoDecorrido(Aluguel aluguel, Devolucao devolucao);
+
 }

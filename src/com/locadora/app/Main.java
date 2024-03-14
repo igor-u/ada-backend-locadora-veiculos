@@ -6,8 +6,6 @@ import java.time.LocalTime;
 import com.locadora.model.cliente.Cliente;
 import com.locadora.model.cliente.PessoaFisica;
 import com.locadora.model.cliente.PessoaJuridica;
-import com.locadora.model.locacao.Alugar;
-import com.locadora.model.locacao.Devolver;
 import com.locadora.model.veiculo.Veiculo;
 import com.locadora.model.veiculo.VeiculoComValorDiaria;
 import com.locadora.repository.impl.ClienteRepositoryInMemoryImpl;
@@ -51,14 +49,14 @@ public class Main {
         clienteRepo.cadastrar(pessoaJuridica1);
         clienteRepo.buscarPorParteDoNome("fanta").forEach((System.out::println));
 
-        Aluguel aluguelPF = new Alugar().veiculo(vectra)
+        Aluguel aluguelPF = new Aluguel.Alugar().veiculo(vectra)
                 .paraCliente(pessoaFisica1)
                 .noLocal("Local1")
                 .naData(LocalDate.of(2024, 03, 12))
                 .noHorario(LocalTime.of(12, 30, 0))
                 .finalizar();
 
-        Devolucao devolucaoPF = new Devolver().aluguel(aluguelPF)
+        Devolucao devolucaoPF = new Devolucao.Devolver().aluguel(aluguelPF)
                 .noLocal("Local2")
                 .naData(LocalDate.of(2024, 03, 18))
                 .noHorario(LocalTime.of(12, 30, 0))
@@ -69,23 +67,23 @@ public class Main {
         double valorCobradoPF = caixaPF.realizarCobranca(devolucaoPF);
         System.out.println("Valor do primeiro aluguel (PF): " + valorCobradoPF);
 
-		Aluguel aluguelPJ = new Alugar().veiculo(duster)
-				.paraCliente(pessoaJuridica1)
-				.noLocal("Local3")
-				.naData(LocalDate.of(2024, 03, 12))
-				.noHorario(LocalTime.of(12, 30, 0))
-				.finalizar();
+        Aluguel aluguelPJ = new Aluguel.Alugar().veiculo(duster)
+                .paraCliente(pessoaJuridica1)
+                .noLocal("Local3")
+                .naData(LocalDate.of(2024, 03, 12))
+                .noHorario(LocalTime.of(12, 30, 0))
+                .finalizar();
 
-		Devolucao devolucaoPJ = new Devolver().aluguel(aluguelPJ)
-				.noLocal("Local4")
-				.naData(LocalDate.of(2024, 03, 16))
-				.noHorario(LocalTime.of(12, 30, 0))
-				.fecharAluguel()
-				.finalizar();
+        Devolucao devolucaoPJ = new Devolucao.Devolver().aluguel(aluguelPJ)
+                .noLocal("Local4")
+                .naData(LocalDate.of(2024, 03, 16))
+                .noHorario(LocalTime.of(12, 30, 0))
+                .fecharAluguel()
+                .finalizar();
 
-		Caixa caixaPJ = new Caixa(new CalculadoraDevolucaoPessoaJuridica(), new CalculadoraDiasDecorridos());
-		double valorCobradoPJ = caixaPJ.realizarCobranca(devolucaoPJ);
-		System.out.println("Valor do segundo aluguel (PJ): " + valorCobradoPJ);
+        Caixa caixaPJ = new Caixa(new CalculadoraDevolucaoPessoaJuridica(), new CalculadoraDiasDecorridos());
+        double valorCobradoPJ = caixaPJ.realizarCobranca(devolucaoPJ);
+        System.out.println("Valor do segundo aluguel (PJ): " + valorCobradoPJ);
 
     }
 

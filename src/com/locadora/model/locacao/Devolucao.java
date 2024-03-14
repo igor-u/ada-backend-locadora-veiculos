@@ -9,19 +9,56 @@ import com.locadora.service.CalculaTempoDecorrido;
 
 public class Devolucao extends EncontroPresencial {
 
-	private Aluguel aluguel;
+    private Aluguel aluguel;
 
-	public void setAluguel(Aluguel aluguel) throws AluguelFechadoException {
-		if (!aluguel.isPendente()){
-			throw new AluguelFechadoException(aluguel.getVeiculoAgregado().getVeiculo().getNome() +
-					" com placa "+ aluguel.getVeiculoAgregado().getVeiculo().getPlaca() +
-					" se encontra devoluto.");
-		}
-		this.aluguel = aluguel;
-	}
+    private Devolucao() {
+    }
 
-	public Aluguel getAluguel() {
-		return aluguel;
-	}
+    public void setAluguel(Aluguel aluguel) throws AluguelFechadoException {
+        if (!aluguel.isPendente()) {
+            throw new AluguelFechadoException(aluguel.getVeiculoAgregado().getVeiculo().getNome() +
+                    " com placa " + aluguel.getVeiculoAgregado().getVeiculo().getPlaca() +
+                    " se encontra devoluto.");
+        }
+        this.aluguel = aluguel;
+    }
+
+    public Aluguel getAluguel() {
+        return aluguel;
+    }
+
+    public static class Devolver {
+
+        private Devolucao devolucao = new Devolucao();
+
+        public Devolver aluguel(Aluguel aluguel) {
+            devolucao.setAluguel(aluguel);
+            return this;
+        }
+
+        public Devolver noLocal(String local) {
+            devolucao.setLocal(local);
+            return this;
+        }
+
+        public Devolver naData(LocalDate data) {
+            devolucao.setData(data);
+            return this;
+        }
+
+        public Devolver noHorario(LocalTime horario) {
+            devolucao.setHorario(horario);
+            return this;
+        }
+
+        public Devolver fecharAluguel() {
+            devolucao.getAluguel().setPendente(false);
+            return this;
+        }
+
+        public Devolucao finalizar() {
+            return devolucao;
+        }
+    }
 
 }
