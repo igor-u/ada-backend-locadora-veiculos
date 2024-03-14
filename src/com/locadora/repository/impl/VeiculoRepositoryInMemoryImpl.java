@@ -33,7 +33,9 @@ public class VeiculoRepositoryInMemoryImpl implements VeiculoRepository {
 
 	@Override
 	public List<Veiculo> buscarPorParteDoNome(String parteDoNome) {
-		return veiculos.stream().filter(v -> v.getNome().contains(parteDoNome)).collect(Collectors.toList());		
+		return veiculos.stream()
+				.filter(v -> v.getNome().toLowerCase().contains(parteDoNome.toLowerCase()))
+				.collect(Collectors.toList());
 	}
 
 	@Override

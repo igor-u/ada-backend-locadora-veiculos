@@ -1,4 +1,7 @@
-package com.locadora.service.locacao;
+package com.locadora.service;
+
+import com.locadora.model.locacao.Aluguel;
+import com.locadora.model.locacao.Devolucao;
 
 import java.time.temporal.ChronoUnit;
 

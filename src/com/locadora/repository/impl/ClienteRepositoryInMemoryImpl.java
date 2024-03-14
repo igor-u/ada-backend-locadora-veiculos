@@ -23,7 +23,7 @@ public class ClienteRepositoryInMemoryImpl implements ClienteRepository {
 
 	@Override
 	public Cliente cadastrar(Cliente cliente) {
-		boolean idExiste = clientes.stream().anyMatch(v -> v.getIdentificador().equals(cliente.getIdentificador()));
+		boolean idExiste = clientes.stream().anyMatch(c -> c.getIdentificador().equals(cliente.getIdentificador()));
 
 		if(!idExiste) {
 			clientes.add(cliente);
@@ -34,7 +34,9 @@ public class ClienteRepositoryInMemoryImpl implements ClienteRepository {
 
 	@Override
 	public List<Cliente> buscarPorParteDoNome(String parteDoNome) {
-		return clientes.stream().filter(c -> c.getNome().contains(parteDoNome)).collect(Collectors.toList());
+		return clientes.stream()
+				.filter(c -> c.getNome().toLowerCase().contains(parteDoNome.toLowerCase()))
+				.collect(Collectors.toList());
 
 	}
 
