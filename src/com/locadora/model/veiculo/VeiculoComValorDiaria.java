@@ -5,14 +5,13 @@ import com.locadora.service.CalculaValorDiaria;
 public class VeiculoComValorDiaria {
 
     private Veiculo veiculo;
-    private boolean disponivel;
+    private boolean disponivel = true;
 
     private CalculaValorDiaria calculaValorDiaria;
 
     public VeiculoComValorDiaria(Veiculo veiculo, CalculaValorDiaria calculaValorDiaria) {
         this.veiculo = veiculo;
         this.calculaValorDiaria = calculaValorDiaria;
-        this.disponivel = true;
     }
 
     public double calcularValorDiaria() {

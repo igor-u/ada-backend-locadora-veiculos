@@ -20,12 +20,7 @@ public class Aluguel extends EncontroPresencial {
         return veiculoComValorDiaria;
     }
 
-    public void setVeiculoAgregado(VeiculoComValorDiaria veiculoAgregado) throws VeiculoIndisponivelException {
-        if (!veiculoAgregado.isDisponivel()) {
-            throw new VeiculoIndisponivelException(veiculoAgregado.getVeiculo().getNome() +
-                    " com placa " + veiculoAgregado.getVeiculo().getPlaca() +
-                    " se encontra alugado.");
-        }
+    public void setVeiculoAgregado(VeiculoComValorDiaria veiculoAgregado) {
         this.veiculoComValorDiaria = veiculoAgregado;
         veiculoAgregado.setDisponivel(false);
     }
@@ -48,9 +43,15 @@ public class Aluguel extends EncontroPresencial {
 
     public static class Alugar {
 
-        private Aluguel aluguel = new Aluguel();
+        private Aluguel aluguel;
 
-        public Alugar veiculo(VeiculoComValorDiaria veiculo) {
+        public Alugar veiculo(VeiculoComValorDiaria veiculo) throws VeiculoIndisponivelException {
+            if (!veiculo.isDisponivel()) {
+                throw new VeiculoIndisponivelException(veiculo.getVeiculo().getNome() +
+                        " com placa " + veiculo.getVeiculo().getPlaca() +
+                        " se encontra alugado.");
+            }
+            aluguel = new Aluguel();
             aluguel.setVeiculoAgregado(veiculo);
             return this;
         }

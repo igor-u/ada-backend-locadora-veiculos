@@ -1,8 +1,8 @@
 package com.locadora.service;
 
-public class CalculadoraDevolucaoPessoaJuridica implements CalculaValorDevolucao {
+public class CalculadoraDevolucaoPessoaJuridica implements CalculaValorDevolucao<Long> {
 
-    public double calcularValorDevolucao(CalculaValorDiaria calculaValorDiaria, int dias) {
+    public double calcularValorDevolucao(CalculaValorDiaria calculaValorDiaria, Long dias) {
 
         double valorCobrado = dias * calculaValorDiaria.calcularValorDiaria();
 

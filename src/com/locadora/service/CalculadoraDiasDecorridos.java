@@ -5,12 +5,12 @@ import com.locadora.model.locacao.Devolucao;
 
 import java.time.temporal.ChronoUnit;
 
-public class CalculadoraDiasDecorridos implements CalculaTempoDecorrido {
+public class CalculadoraDiasDecorridos implements CalculaTempoDecorrido<Long> {
 
     @Override
-    public int calcularTempoDecorrido(Aluguel aluguel, Devolucao devolucao) {
+    public Long calcularTempoDecorrido(Aluguel aluguel, Devolucao devolucao) {
 
-        int diasDecorridos = 1 + (int) ChronoUnit.DAYS.between(aluguel.getData(), devolucao.getData());
+        Long diasDecorridos = 1 + ChronoUnit.DAYS.between(aluguel.getData(), devolucao.getData());
 
         if (aluguel.getHorario().compareTo(devolucao.getHorario()) >= 0) {
             diasDecorridos--;

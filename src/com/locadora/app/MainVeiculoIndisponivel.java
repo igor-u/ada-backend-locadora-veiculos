@@ -30,6 +30,8 @@ public class MainVeiculoIndisponivel {
             Aluguel aluguel1 = new Aluguel.Alugar().veiculo(vectra).finalizar();
         } catch (RuntimeException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("Continua o programa.");
         }
     }
 

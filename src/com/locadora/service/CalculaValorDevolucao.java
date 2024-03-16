@@ -1,7 +1,7 @@
 package com.locadora.service;
 
-public interface CalculaValorDevolucao {
+public interface CalculaValorDevolucao<T extends Number> {
 
-    double calcularValorDevolucao(CalculaValorDiaria calculaValorDiaria, int duracaoAluguel);
+    double calcularValorDevolucao(CalculaValorDiaria calculaValorDiaria, T duracaoAluguel);
 
 }

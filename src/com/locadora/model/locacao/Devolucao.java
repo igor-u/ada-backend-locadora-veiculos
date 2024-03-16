@@ -14,13 +14,9 @@ public class Devolucao extends EncontroPresencial {
     private Devolucao() {
     }
 
-    public void setAluguel(Aluguel aluguel) throws AluguelFechadoException {
-        if (!aluguel.isPendente()) {
-            throw new AluguelFechadoException(aluguel.getVeiculoAgregado().getVeiculo().getNome() +
-                    " com placa " + aluguel.getVeiculoAgregado().getVeiculo().getPlaca() +
-                    " se encontra devoluto.");
-        }
+    public void setAluguel(Aluguel aluguel) {
         this.aluguel = aluguel;
+        aluguel.setPendente(false);
     }
 
     public Aluguel getAluguel() {
@@ -29,9 +25,15 @@ public class Devolucao extends EncontroPresencial {
 
     public static class Devolver {
 
-        private Devolucao devolucao = new Devolucao();
+        private Devolucao devolucao;
 
-        public Devolver aluguel(Aluguel aluguel) {
+        public Devolver aluguel(Aluguel aluguel) throws AluguelFechadoException {
+            if (!aluguel.isPendente()) {
+                throw new AluguelFechadoException(aluguel.getVeiculoAgregado().getVeiculo().getNome() +
+                        " com placa " + aluguel.getVeiculoAgregado().getVeiculo().getPlaca() +
+                        " se encontra devoluto.");
+            }
+            devolucao = new Devolucao();
             devolucao.setAluguel(aluguel);
             return this;
         }

@@ -38,6 +38,8 @@ public class MainAluguelFechado {
             Devolucao devolucao1 = new Devolucao.Devolver().aluguel(aluguel).finalizar();
         } catch (RuntimeException e) {
             e.printStackTrace();
+        } finally {
+            System.out.println("Continua o programa.");
         }
     }
 }

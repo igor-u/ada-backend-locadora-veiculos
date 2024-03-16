@@ -32,8 +32,8 @@ public class Main {
         veiculoRepo.cadastrar(veiculo3);
         veiculoRepo.buscarPorParteDoNome("duster").forEach((System.out::println));
 
-        VeiculoComValorDiaria vectra = new VeiculoComValorDiaria(veiculo1, TipoVeiculo.MEDIO);
-        VeiculoComValorDiaria duster = new VeiculoComValorDiaria(veiculo3, TipoVeiculo.SUV);
+        VeiculoComValorDiaria veiculoComValorDiaria1 = new VeiculoComValorDiaria(veiculo1, TipoVeiculo.MEDIO);
+        VeiculoComValorDiaria veiculoComValorDiaria2 = new VeiculoComValorDiaria(veiculo3, TipoVeiculo.SUV);
 
         ClienteRepositoryInMemoryImpl clienteRepo = ClienteRepositoryInMemoryImpl.getInstance();
         Cliente pessoaFisica1 = new PessoaFisica("12345", "Joao");
@@ -49,7 +49,7 @@ public class Main {
         clienteRepo.cadastrar(pessoaJuridica1);
         clienteRepo.buscarPorParteDoNome("fanta").forEach((System.out::println));
 
-        Aluguel aluguelPF = new Aluguel.Alugar().veiculo(vectra)
+        Aluguel aluguelPF = new Aluguel.Alugar().veiculo(veiculoComValorDiaria1)
                 .paraCliente(pessoaFisica1)
                 .noLocal("Local1")
                 .naData(LocalDate.of(2024, 03, 12))
@@ -67,7 +67,7 @@ public class Main {
         double valorCobradoPF = caixaPF.realizarCobranca(devolucaoPF);
         System.out.println("Valor do primeiro aluguel (PF): " + valorCobradoPF);
 
-        Aluguel aluguelPJ = new Aluguel.Alugar().veiculo(duster)
+        Aluguel aluguelPJ = new Aluguel.Alugar().veiculo(veiculoComValorDiaria2)
                 .paraCliente(pessoaJuridica1)
                 .noLocal("Local3")
                 .naData(LocalDate.of(2024, 03, 12))

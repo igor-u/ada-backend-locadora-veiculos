@@ -3,8 +3,8 @@ package com.locadora.service;
 import com.locadora.model.locacao.Aluguel;
 import com.locadora.model.locacao.Devolucao;
 
-public interface CalculaTempoDecorrido {
+public interface CalculaTempoDecorrido<T extends Number> {
 
-    int calcularTempoDecorrido(Aluguel aluguel, Devolucao devolucao);
+    T calcularTempoDecorrido(Aluguel aluguel, Devolucao devolucao);
 
 }
